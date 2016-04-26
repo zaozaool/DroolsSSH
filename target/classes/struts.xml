@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+<!-- 	<constant name="struts.convention.default.parent.package" value="convention-default" /> -->
+	<constant name="struts.convention.package.locators" value="web" />
+	<constant name="struts.convention.action.name.separator" value="_"/>
+	<constant name="struts.convention.result.path" value="/WEB-INF/jsps/"/>
+<!-- 	<constant name="struts.action.extension" value=""/>   -->
+	<constant name="struts.convention.package.locators.basePackage" value="com.genscript" />
+	
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	
+	<!-- struts2 restful -->  
+    <constant name="struts.mapper.class" value="rest" />
+    <constant name="struts.convention.action.suffix" value="Api"/>  
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>  
+    <constant name="struts.convention.default.parent.package" value="rest-default"/>
+	
+	<package name="crud-default" extends="convention-default">
+	    <default-interceptor-ref name="crudStack" />
+	</package>
+	
+	<constant name="struts.multipart.maxSize" value="15728640"/>
+	
+</struts>
