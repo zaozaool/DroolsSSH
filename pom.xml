@@ -23,6 +23,7 @@
 		<net.sf.json.version>2.2.3</net.sf.json.version>
 		<dbcp.version>1.2.2</dbcp.version>
 		<mysql.version>5.1.21</mysql.version>
+		<jstl.version>1.1.2</jstl.version>
 	</properties>
 
 
@@ -191,6 +192,16 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-rest-plugin</artifactId>
 			<version>${struts.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>${jstl.version}</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -1,0 +1,152 @@
+package com.genscript.gsscm.price.gene
+
+import com.genscript.gsscm.rule.fact.*
+import com.genscript.gsscm.rule.entity.*
+import com.genscript.gsscm.rule.fact.price.*
+import com.genscript.gsscm.util.DroolsUtil
+
+dialect  "mvel"
+
+rule "usorder-price-SC1010 v20160426"
+    when
+        $f : GenePriceFact(site == "usorder", action == "price", catalogNo == "SC1010", version == "v20160426")
+    then
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " usorder-price-SC1010 start...");
+        $f.setBaseCurrency("USD");
+        $f.setTpCurrency("USD");
+        //根据属性查询价格信息
+        GeneBasePrice gbp = DroolsUtil.getPriceService().getGeneBasePrice($f.getCatalogNo(), $f.getSeqLength(), $f.getCloneReady().toString(), $f.getSite(), $f.getVersion());
+        //DroolsUtil.log(gbp);
+        if (gbp == null) {
+        	$f.setDifficultFlag(1);
+        } else {
+			if (gbp.getListingBpPrice() == null  || gbp.getListingBpPrice() < 0 || gbp.getTransferBpPriceP() == null || gbp.getTransferBpPriceP() < 0 || gbp.getTransferBpPriceS() == null  || gbp.getTransferBpPriceS() < 0) {
+        		$f.setDifficultFlag(1);
+			} else {
+				$f.setBaseBpPrice(gbp.getListingBpPrice().doubleValue());
+				
+		        $f.setBasePrice($f.getBaseBpPrice() * $f.getSeqLength());
+		        $f.setTransferPriceP(gbp.getTransferBpPriceP().doubleValue() * $f.getSeqLength());
+		        $f.setTransferPriceS(gbp.getTransferBpPriceS().doubleValue() * $f.getSeqLength());
+		        // 加上固定值
+		        double fixedPrice = gbp.getFixedListingPrice() == null ? 0.0 : gbp.getFixedListingPrice().doubleValue();
+		        double fixedTpp = gbp.getFixedTransferPriceP() == null ? 0.0 : gbp.getFixedTransferPriceP().doubleValue();
+		        double fixedTps = gbp.getFixedTransferPriceS() == null ? 0.0 : gbp.getFixedTransferPriceS().doubleValue();
+		        $f.setBasePrice($f.getBasePrice() + fixedPrice);
+		        $f.setTransferPriceP($f.getTransferPriceP() + fixedTpp);
+		        $f.setTransferPriceS($f.getTransferPriceS() + fixedTps);
+		       	// 最小值校验
+				double minPrice = gbp.getMinListingPrice() == null ? 0.0 : gbp.getMinListingPrice().doubleValue();
+				double minTpp = gbp.getMinTransferPriceP() == null ? 0.0 : gbp.getMinTransferPriceP().doubleValue();
+				double minTps = gbp.getMinTransferPriceS() == null ? 0.0 : gbp.getMinTransferPriceS().doubleValue();
+		        $f.setBasePrice($f.getBasePrice() < minPrice ? minPrice : $f.getBasePrice());
+		        $f.setTransferPriceP($f.getTransferPriceP() < minTpp ? minTpp : $f.getTransferPriceP());
+		        $f.setTransferPriceS($f.getTransferPriceS() < minTps ? minTps : $f.getTransferPriceS());
+			}
+        }
+        $f.setStatus("Success");
+        $f.setMessage("Successful");
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " calculate price for usorder SC1010 end...");
+end
+
+rule "cnorder-price-SC1010 v20160426"
+    when
+        $f : GenePriceFact(site == "cnorder", action == "price", catalogNo == "SC1010", version == "v20160426")
+    then
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " usorder-price-SC1010 start...");
+        $f.setBaseCurrency("CNY");
+        $f.setTpCurrency("CNY");
+        //根据属性查询价格信息
+        GeneBasePrice gbp = DroolsUtil.getPriceService().getGeneBasePrice($f.getCatalogNo(), $f.getSeqLength(), $f.getCloneReady().toString(), $f.getSite(), $f.getVersion());
+        DroolsUtil.log(gbp);
+        if (gbp == null) {
+        	$f.setDifficultFlag(1);
+        } else {
+			if (gbp.getListingBpPrice() == null  || gbp.getListingBpPrice() < 0 || gbp.getTransferBpPriceP() == null || gbp.getTransferBpPriceP() < 0 || gbp.getTransferBpPriceS() == null  || gbp.getTransferBpPriceS() < 0) {
+        		$f.setDifficultFlag(1);
+			} else {
+				$f.setBaseBpPrice(gbp.getListingBpPrice().doubleValue());
+				
+		        $f.setBasePrice($f.getBaseBpPrice() * $f.getSeqLength());
+		        $f.setTransferPriceP(gbp.getTransferBpPriceP().doubleValue() * $f.getSeqLength());
+		        $f.setTransferPriceS(gbp.getTransferBpPriceS().doubleValue() * $f.getSeqLength());
+		        // 加上固定值
+		        double fixedPrice = gbp.getFixedListingPrice() == null ? 0.0 : gbp.getFixedListingPrice().doubleValue();
+		        double fixedTpp = gbp.getFixedTransferPriceP() == null ? 0.0 : gbp.getFixedTransferPriceP().doubleValue();
+		        double fixedTps = gbp.getFixedTransferPriceS() == null ? 0.0 : gbp.getFixedTransferPriceS().doubleValue();
+		        $f.setBasePrice($f.getBasePrice() + fixedPrice);
+		        $f.setTransferPriceP($f.getTransferPriceP() + fixedTpp);
+		        $f.setTransferPriceS($f.getTransferPriceS() + fixedTps);
+		       	// 最小值校验
+				double minPrice = gbp.getMinListingPrice() == null ? 0.0 : gbp.getMinListingPrice().doubleValue();
+				double minTpp = gbp.getMinTransferPriceP() == null ? 0.0 : gbp.getMinTransferPriceP().doubleValue();
+				double minTps = gbp.getMinTransferPriceS() == null ? 0.0 : gbp.getMinTransferPriceS().doubleValue();
+		        $f.setBasePrice($f.getBasePrice() < minPrice ? minPrice : $f.getBasePrice());
+		        $f.setTransferPriceP($f.getTransferPriceP() < minTpp ? minTpp : $f.getTransferPriceP());
+		        $f.setTransferPriceS($f.getTransferPriceS() < minTps ? minTps : $f.getTransferPriceS());
+			}
+        }
+        $f.setStatus("Success");
+        $f.setMessage("Successful");
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " cnorder-price-SC1010 end...");
+end
+
+
+rule "jporder-price-SC1010 v20160426"
+    when
+        $f : GenePriceFact(site == "jporder", action == "price", catalogNo == "SC1010", version == "v20160426")
+    then
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " jporder-price-SC1010 start...");
+        $f.setBaseCurrency("JPY");
+        $f.setTpCurrency("USD");
+        //根据属性查询价格信息
+        GeneBasePrice gbp = DroolsUtil.getPriceService().getGeneBasePrice($f.getCatalogNo(), $f.getSeqLength(), $f.getCloneReady().toString(), $f.getSite(), $f.getVersion());
+        //DroolsUtil.log(gbp);
+        if (gbp == null) {
+        	$f.setDifficultFlag(1);
+        } else {
+			if (gbp.getListingBpPrice() == null  || gbp.getListingBpPrice() < 0 || gbp.getTransferBpPriceP() == null || gbp.getTransferBpPriceP() < 0 || gbp.getTransferBpPriceS() == null  || gbp.getTransferBpPriceS() < 0) {
+        		$f.setDifficultFlag(1);
+			} else {
+				if ($f.getCustGeneMemoBpPrice() != null && $f.getCustGeneMemoBpPrice() > 0) {
+        			$f.setBaseBpPrice($f.getCustGeneMemoBpPrice());
+					
+					$f.setBasePrice($f.getBaseBpPrice() * $f.getSeqLength());
+			        // 加上固定值
+			        double fixedPrice = $f.getCustGeneMemoFixedPrice() == null ? 0.0 : $f.getCustGeneMemoFixedPrice();
+		        	$f.setBasePrice($f.getBasePrice() + fixedPrice);
+			       	// 最小值校验
+			        double minPrice = $f.getCustGeneMemoMinPrice() == null ? 0.0 : $f.getCustGeneMemoMinPrice();
+		        	$f.setBasePrice($f.getBasePrice() < minPrice ? minPrice : $f.getBasePrice());
+				} else {
+					$f.setBaseBpPrice(gbp.getListingBpPrice().doubleValue());
+					
+					$f.setBasePrice($f.getBaseBpPrice() * $f.getSeqLength());
+			        // 加上固定值
+			        double fixedPrice = gbp.getFixedListingPrice() == null ? 0.0 : ($f.getVipFlag() == "Y" ? gbp.getVipFixedListingPrice().doubleValue() : gbp.getFixedListingPrice().doubleValue());
+		        	$f.setBasePrice($f.getBasePrice() + fixedPrice);
+			       	// 最小值校验
+					double minPrice = gbp.getMinListingPrice() == null ? 0.0 : ($f.getVipFlag() == "Y" ? gbp.getMinVipListingPrice().doubleValue() : gbp.getMinListingPrice().doubleValue());
+		        	$f.setBasePrice($f.getBasePrice() < minPrice ? minPrice : $f.getBasePrice());
+				}
+				
+		        $f.setTransferPriceP(gbp.getTransferBpPriceP().doubleValue() * $f.getSeqLength());
+		        $f.setTransferPriceS(gbp.getTransferBpPriceS().doubleValue() * $f.getSeqLength());
+		        // 加上固定值
+		        double fixedTpp = gbp.getFixedTransferPriceP() == null ? 0.0 : gbp.getFixedTransferPriceP().doubleValue();
+		        double fixedTps = gbp.getFixedTransferPriceS() == null ? 0.0 : gbp.getFixedTransferPriceS().doubleValue();
+		        $f.setTransferPriceP($f.getTransferPriceP() + fixedTpp);
+		        $f.setTransferPriceS($f.getTransferPriceS() + fixedTps);
+		       	// 最小值校验
+				double minPrice = gbp.getMinListingPrice() == null ? 0.0 : ($f.getVipFlag() == "Y" ? gbp.getMinVipListingPrice().doubleValue() : gbp.getMinListingPrice().doubleValue());
+				double minTpp = gbp.getMinTransferPriceP() == null ? 0.0 : gbp.getMinTransferPriceP().doubleValue();
+				double minTps = gbp.getMinTransferPriceS() == null ? 0.0 : gbp.getMinTransferPriceS().doubleValue();
+		        $f.setTransferPriceP($f.getTransferPriceP() < minTpp ? minTpp : $f.getTransferPriceP());
+		        $f.setTransferPriceS($f.getTransferPriceS() < minTps ? minTps : $f.getTransferPriceS());
+			}
+        }
+        $f.setStatus("Success");
+        $f.setMessage("Successful");
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " jporder-price-SC1010 end...");
+end
+

@@ -1,13 +1,8 @@
-/**
- * <p>Project: RMS</p>
- * <p>File: PriceFact.java</p>
- * <p>Copyright: Copyright (c) 2016.All rights reserved.</p>
- * <p>Company:www.genscript.com</p>
- * Date:2016-4-26
- * @author:Administrator
- */
 package com.genscript.gsscm.rule.fact.price;
 
+import com.genscript.gsscm.common.annotation.Rule;
+import com.genscript.gsscm.common.constant.Action;
+import com.genscript.gsscm.common.constant.Site;
 import com.genscript.gsscm.rule.fact.BaseFact;
 
 /**
@@ -15,56 +10,46 @@ import com.genscript.gsscm.rule.fact.BaseFact;
  */
 public class PriceFact extends BaseFact {
 
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
     private String catalogNo;
 
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
     private String baseCurrency;
 
-    private Double BasePrice;
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
+    private Double basePrice;
 
-    private Double BaseAmount;
-
-    private String currency;
-
-    private Double price;
-
-    private Double amount;
-
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
     private String tpCurrency;
 
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
     private Double transferPriceS;
 
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
     private Double transferPriceP;
 
+    // 1为难度
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
+    private Integer difficultFlag;
+
+    // Y为vip，针对日本订单系统
+    @Rule(action = { Action.PRICE }, site = { Site.JP_ORDER })
+    private String vipFlag;
+
+    public Integer getDifficultFlag() {
+        return difficultFlag;
+    }
+
+    public void setDifficultFlag(Integer difficultFlag) {
+        this.difficultFlag = difficultFlag;
+    }
+
     public Double getBasePrice() {
-        return BasePrice;
+        return basePrice;
     }
 
     public void setBasePrice(Double basePrice) {
-        BasePrice = basePrice;
-    }
-
-    public Double getBaseAmount() {
-        return BaseAmount;
-    }
-
-    public void setBaseAmount(Double baseAmount) {
-        BaseAmount = baseAmount;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
+        this.basePrice = basePrice;
     }
 
     public String getBaseCurrency() {
@@ -73,14 +58,6 @@ public class PriceFact extends BaseFact {
 
     public void setBaseCurrency(String baseCurrency) {
         this.baseCurrency = baseCurrency;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
     }
 
     public Double getTransferPriceS() {
@@ -99,6 +76,14 @@ public class PriceFact extends BaseFact {
         this.transferPriceP = transferPriceP;
     }
 
+    public String getCatalogNo() {
+        return catalogNo;
+    }
+
+    public void setCatalogNo(String catalogNo) {
+        this.catalogNo = catalogNo;
+    }
+
     public String getTpCurrency() {
         return tpCurrency;
     }
@@ -107,12 +92,12 @@ public class PriceFact extends BaseFact {
         this.tpCurrency = tpCurrency;
     }
 
-    public String getCatalogNo() {
-        return catalogNo;
+    public String getVipFlag() {
+        return vipFlag;
     }
 
-    public void setCatalogNo(String catalogNo) {
-        this.catalogNo = catalogNo;
+    public void setVipFlag(String vipFlag) {
+        this.vipFlag = vipFlag;
     }
 
 }

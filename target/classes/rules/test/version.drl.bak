@@ -1,0 +1,29 @@
+package com.genscript.gsscm.version
+
+import com.genscript.gsscm.rule.fact.*
+import com.genscript.gsscm.rule.fact.point.*
+import com.genscript.gsscm.rule.fact.price.*
+import com.genscript.gsscm.util.DroolsUtil
+
+dialect  "mvel"
+
+rule "Get Lastest Version for SC1010"
+	salience 500
+    when
+        $f : PriceFact(version == "", catalogNo == 'SC1010')
+    then
+        $f.setVersion("v20160426")
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " Get Lastest Version for SC1010")
+        update($f)
+end
+
+
+rule "Get Lastest Version for Point"
+	salience 500
+    when
+        $f : PointFact(version == "")
+    then
+        $f.setVersion("v20160426")
+    	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " Get Lastest Version for Point")
+        update($f)
+end

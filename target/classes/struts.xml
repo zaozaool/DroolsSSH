@@ -15,7 +15,7 @@
 	
 	<!-- struts2 restful -->  
     <constant name="struts.mapper.class" value="rest" />
-    <constant name="struts.convention.action.suffix" value="Api"/>  
+    <constant name="struts.convention.action.suffix" value="Controller"/>  
     <constant name="struts.convention.action.mapAllMatches" value="true"/>  
     <constant name="struts.convention.default.parent.package" value="rest-default"/>
 	

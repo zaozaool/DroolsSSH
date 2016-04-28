@@ -1,11 +1,3 @@
-/**
- * <p>Project: RMS</p>
- * <p>File: BaseFact.java</p>
- * <p>Copyright: Copyright (c) 2016.All rights reserved.</p>
- * <p>Company:www.genscript.com</p>
- * Date:2016-4-26
- * @author:Administrator
- */
 package com.genscript.gsscm.rule.fact;
 
 /**
@@ -16,6 +8,12 @@ public class BaseFact {
     private String uuid;
 
     private String version;
+
+    private String ruleName;
+
+    private String site;
+
+    private String action;
 
     private String message;
 
@@ -30,7 +28,7 @@ public class BaseFact {
     }
 
     public String getVersion() {
-        return version;
+        return version == null ? "" : version;
     }
 
     public void setVersion(String version) {
@@ -51,6 +49,30 @@ public class BaseFact {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getRuleName() {
+        return ruleName;
+    }
+
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
     }
 
 }
