@@ -1,5 +1,7 @@
 package com.genscript.gsscm.rule.fact.price;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.genscript.gsscm.common.annotation.Rule;
 import com.genscript.gsscm.common.constant.Action;
 import com.genscript.gsscm.common.constant.Site;
@@ -85,12 +87,9 @@ public class GenePriceFact extends PriceFact {
         this.custGeneMemoFixedPrice = custGeneMemoFixedPrice;
     }
 
-    // public String getSequence() {
-    // return sequence;
-    // }
-    //
-    // public void setSequence(String sequence) {
-    // this.sequence = sequence;
-    // }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

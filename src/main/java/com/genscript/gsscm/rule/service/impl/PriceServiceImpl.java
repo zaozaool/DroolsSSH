@@ -3,6 +3,7 @@ package com.genscript.gsscm.rule.service.impl;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.kie.api.cdi.KSession;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,13 @@ public class PriceServiceImpl implements PriceService {
     @Autowired
     private GeneBasePriceDao geneBasePriceDao;
 
+    private static Logger logger = Logger.getLogger(PriceServiceImpl.class);
+
     public JSONObject calculatePrice(PriceFact fact) {
+        logger.info(fact);
         kieSession.insert(fact);
         kieSession.fireAllRules();
+        logger.info(fact);
         return DroolsUtil.getReturnJson(fact);
     }
 

@@ -116,7 +116,6 @@ public class DroolsUtil {
         Class clazz = fact.getClass();
         // 依次迭代本身及其父类型的注解
         while (clazz != null && !clazz.equals(Object.class)) {
-            System.out.println(clazz);
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
                 Rule rule = field.getAnnotation(Rule.class);

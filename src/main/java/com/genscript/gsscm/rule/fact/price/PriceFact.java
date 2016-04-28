@@ -1,5 +1,7 @@
 package com.genscript.gsscm.rule.fact.price;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.genscript.gsscm.common.annotation.Rule;
 import com.genscript.gsscm.common.constant.Action;
 import com.genscript.gsscm.common.constant.Site;
@@ -100,4 +102,8 @@ public class PriceFact extends BaseFact {
         this.vipFlag = vipFlag;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

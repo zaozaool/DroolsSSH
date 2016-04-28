@@ -1,5 +1,7 @@
 package com.genscript.gsscm.rule.fact;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * 用于drools的基础fact
  */
@@ -75,4 +77,8 @@ public class BaseFact {
         this.ruleName = ruleName;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
