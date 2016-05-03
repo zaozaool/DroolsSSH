@@ -7,11 +7,11 @@
 	">
 
 	<kie:kmodule id="kmodule">
-		<kie:kbase name="item" packages="rules.price.item">
-			<kie:ksession name="item" />
+		<kie:kbase name="itemKbase" packages="rules.price.item">
+			<kie:ksession name="itemKsession" />
 		</kie:kbase>
-		<kie:kbase name="shipping" packages="rules.price.shipping">
-			<kie:ksession name="shipping" />
+		<kie:kbase name="shippingKbase" packages="rules.price.shipping">
+			<kie:ksession name="shippingKsession" />
 		</kie:kbase>
 
 	</kie:kmodule>

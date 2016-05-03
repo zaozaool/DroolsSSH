@@ -21,7 +21,7 @@ import com.genscript.gsscm.util.DroolsUtil;
 @Transactional
 public class PriceServiceImpl implements PriceService {
 
-    @KSession("item")
+    @KSession("itemKsession")
     private KieSession itemKieSession;
 
     @Autowired
