@@ -7,9 +7,13 @@
 	">
 
 	<kie:kmodule id="kmodule">
-		<kie:kbase name="kbase" packages="rules">
-			<kie:ksession name="ksession" />
+		<kie:kbase name="item" packages="rules.price.item">
+			<kie:ksession name="item" />
 		</kie:kbase>
+		<kie:kbase name="shipping" packages="rules.price.shipping">
+			<kie:ksession name="shipping" />
+		</kie:kbase>
+
 	</kie:kmodule>
 
 	<bean id="kiePostProcessor" class="org.kie.spring.annotations.KModuleAnnotationPostProcessor" />

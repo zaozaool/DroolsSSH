@@ -5,8 +5,8 @@ dialect  "mvel"
 
 rule "Is of valid age"
     when
-        $a : Applicant( age >= 18)
+        eval(true)
     then
-        $a.setValid(true);
+        System.out.println("LLL");
 end
 

@@ -21,8 +21,8 @@ import com.genscript.gsscm.util.DroolsUtil;
 @Transactional
 public class PriceServiceImpl implements PriceService {
 
-    @KSession("ksession")
-    private KieSession kieSession;
+    @KSession("item")
+    private KieSession itemKieSession;
 
     @Autowired
     private GeneBasePriceDao geneBasePriceDao;
@@ -31,9 +31,10 @@ public class PriceServiceImpl implements PriceService {
 
     public JSONObject calculatePrice(PriceFact fact) {
         logger.info(fact);
-        kieSession.insert(fact);
-        kieSession.fireAllRules();
+        itemKieSession.insert(fact);
+        itemKieSession.fireAllRules();
         logger.info(fact);
+
         return DroolsUtil.getReturnJson(fact);
     }
 

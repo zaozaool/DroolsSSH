@@ -12,6 +12,10 @@ import com.genscript.gsscm.rule.fact.BaseFact;
  */
 public class PriceFact extends BaseFact {
 
+    // 计算对应的quote或order NO
+    @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
+    private String srcNo;
+
     @Rule(action = { Action.PRICE }, site = { Site.US_ORDER, Site.JP_ORDER, Site.CN_ORDER })
     private String catalogNo;
 
@@ -100,6 +104,14 @@ public class PriceFact extends BaseFact {
 
     public void setVipFlag(String vipFlag) {
         this.vipFlag = vipFlag;
+    }
+
+    public String getSrcNo() {
+        return srcNo;
+    }
+
+    public void setSrcNo(String srcNo) {
+        this.srcNo = srcNo;
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.genscript.gsscm.rule.web;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import net.sf.json.JSONObject;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -33,6 +36,13 @@ public class ApiController extends ValidationAwareSupport implements ModelDriven
     // POST /api
     public void create() throws IllegalAccessException, InvocationTargetException {
         BaseFact fact = DroolsUtil.parseFact(data);
+
+        Validator validator = new Validator();
+        List<ConstraintViolation> violations = validator.validate(fact);
+        for (ConstraintViolation v : violations) {
+            System.out.println(v.getCheckName());
+        }
+
         if (fact instanceof PriceFact) {
             PriceFact priceFact = (PriceFact) fact;
             JSONObject json = priceService.calculatePrice(priceFact);

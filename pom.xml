@@ -24,6 +24,7 @@
 		<dbcp.version>1.2.2</dbcp.version>
 		<mysql.version>5.1.21</mysql.version>
 		<jstl.version>1.1.2</jstl.version>
+		<oval.version>1.81</oval.version>
 	</properties>
 
 
@@ -202,6 +203,11 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>${jstl.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>net.sf.oval</groupId>
+		    <artifactId>oval</artifactId>
+		    <version>${oval.version}</version>
 		</dependency>
 	</dependencies>
 </project>

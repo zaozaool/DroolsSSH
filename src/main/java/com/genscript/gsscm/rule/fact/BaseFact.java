@@ -1,5 +1,8 @@
 package com.genscript.gsscm.rule.fact;
 
+import net.sf.oval.constraint.NotEmpty;
+import net.sf.oval.constraint.NotNull;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
@@ -7,6 +10,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class BaseFact {
 
+    @NotNull
+    @NotEmpty
     private String uuid;
 
     private String version;
