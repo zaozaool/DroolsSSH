@@ -148,5 +148,13 @@ rule "jporder-price-SC1010 v20160426"
         $f.setStatus("Success");
         $f.setMessage("Successful");
     	DroolsUtil.log("UUID=" + $f.getUuid() + " Verion=" + $f.getVersion() + " jporder-price-SC1010 end...");
+    	DroolsUtil.log("halt");
+    	halt();
 end
 
+rule "testxxx"
+    when
+        eval(true)
+    then
+    	DroolsUtil.log("testests");
+end

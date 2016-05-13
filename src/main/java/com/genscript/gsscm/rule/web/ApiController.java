@@ -1,7 +1,9 @@
 package com.genscript.gsscm.rule.web;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import net.sf.json.JSONObject;
 import net.sf.oval.ConstraintViolation;
@@ -42,6 +44,13 @@ public class ApiController extends ValidationAwareSupport implements ModelDriven
         for (ConstraintViolation v : violations) {
             System.out.println(v.getCheckName());
         }
+
+        Calendar cal = Calendar.getInstance();
+        TimeZone timeZone = cal.getTimeZone();
+        System.out.println(timeZone.getID());
+        System.out.println(timeZone.getDisplayName());
+        TimeZone japan = TimeZone.getTimeZone("Japan");
+        TimeZone usEastern = TimeZone.getTimeZone("US/Eastern");
 
         if (fact instanceof PriceFact) {
             PriceFact priceFact = (PriceFact) fact;
