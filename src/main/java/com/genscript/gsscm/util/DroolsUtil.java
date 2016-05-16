@@ -63,13 +63,13 @@ public class DroolsUtil {
             if (StringUtils.isBlank(fact.getVersion())) {
                 String ruleName = fact.getSite() + "-" + fact.getAction() + "-" + fact.getCatalogNo();
                 fact.setRuleName(ruleName);
-                // String v = versionService.getLastestVersion(ruleName);
-                // if (v == null) {
-                // fact.setStatus("Error");
-                // fact.setMessage("Can't get the lastest version.");
-                // }
-                // fact.setVersion(v);
-                fact.setVersion("v20160426");
+                String v = versionService.getLastestVersion(ruleName);
+                if (v == null) {
+                    fact.setStatus("Error");
+                    fact.setMessage("Can't get the lastest version.");
+                }
+                fact.setVersion(v);
+                // fact.setVersion("v20160426");
             }
             return fact;
         }

@@ -9,6 +9,7 @@
 	<kie:kmodule id="kmodule">
 		<kie:kbase name="itemKbase" packages="rules.price.item">
 			<kie:ksession name="itemKsession" />
+<!-- 			<kie:consoleLogger /> -->
 		</kie:kbase>
 		<kie:kbase name="shippingKbase" packages="rules.price.shipping">
 			<kie:ksession name="shippingKsession" />
